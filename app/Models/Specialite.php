@@ -20,7 +20,11 @@ class Specialite extends Model
     }
 
     public function missions(): HasMany
-    {
-        return $this->hasMany(Mission::class, 'id_specialite');
-    }
+{
+    return $this->hasMany(
+        Mission::class,
+        'id_specialite',
+        'id_specialite'
+    );
+}
 }
