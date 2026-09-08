@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hopital;
+use App\Models\Mission;
+use App\Models\Candidature;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -10,9 +12,25 @@ class HopitalController extends Controller
 {
     // Dashboard
     public function dashboard(): View
-    {
-        return view('hopital.dashboard');
-    }
+{
+    $idHopital = auth()->user()->id;
+
+    $totalMissions = Mission::where('id_hopital', $idHopital)->count();
+
+    $missionsOuvertes = Mission::where('id_hopital', $idHopital)
+        ->where('statut', 'ouverte')
+        ->count();
+
+    $totalCandidatures = Candidature::whereHas('mission', function ($query) use ($idHopital) {
+        $query->where('id_hopital', $idHopital);
+    })->count();
+
+    return view('hopital.dashboard', compact(
+        'totalMissions',
+        'missionsOuvertes',
+        'totalCandidatures'
+    ));
+}
 
     // Profil Hôpital
     public function edit(): View

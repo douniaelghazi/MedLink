@@ -1,32 +1,95 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Modifier la mission
-        </h2>
+        <div>
+            <p class="text-sm text-blue-600 font-semibold">
+                ESPACE HÔPITAL
+            </p>
+
+            <h2 class="text-2xl font-bold text-blue-950 mt-1">
+                Modifier une mission
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="py-8">
 
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-sky-50">
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-                {{-- Erreurs --}}
-                @if ($errors->any())
 
-                    <div class="mb-6 bg-red-100 text-red-700 p-4 rounded-md">
+            {{-- Header --}}
+            <div class="bg-gradient-to-r from-blue-600 to-sky-500
+                        rounded-3xl
+                        shadow-lg
+                        p-8
+                        mb-8
+                        text-white">
 
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                <div class="flex items-center gap-5">
+
+                    <div class="w-16 h-16
+                                bg-white/20
+                                rounded-2xl
+                                flex items-center justify-center
+                                text-3xl">
+                        ✏️
+                    </div>
+
+                    <div>
+
+                        <p class="text-blue-100 text-sm font-medium">
+                            Gestion des missions
+                        </p>
+
+                        <h1 class="text-3xl font-bold mt-1">
+                            Modifier la mission
+                        </h1>
+
+                        <p class="text-blue-50 mt-2">
+                            Modifiez les informations de votre mission médicale.
+                        </p>
 
                     </div>
 
-                @endif
+                </div>
 
+            </div>
+
+
+            {{-- Erreurs --}}
+            @if ($errors->any())
+
+                <div class="mb-6
+                            bg-red-50
+                            border border-red-200
+                            text-red-700
+                            p-4
+                            rounded-xl">
+
+                    <p class="font-semibold mb-2">
+                        Veuillez corriger les erreurs suivantes :
+                    </p>
+
+                    <ul class="list-disc list-inside text-sm">
+
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
+                    </ul>
+
+                </div>
+
+            @endif
+
+
+            {{-- Formulaire --}}
+            <div class="bg-white
+                        rounded-3xl
+                        shadow-sm
+                        border border-sky-100
+                        p-6 sm:p-8">
 
                 <form method="POST"
                       action="{{ route('missions.update', $mission) }}">
@@ -35,65 +98,38 @@
                     @method('PUT')
 
 
-                    {{-- Titre --}}
-                    <div class="mb-4">
+                    {{-- Informations --}}
+                    <div class="mb-8">
 
-                        <label for="titre" class="block font-medium mb-1">
-                            Titre
-                        </label>
+                        <h2 class="text-xl font-bold text-blue-950 mb-1">
+                            Informations de la mission
+                        </h2>
 
-                        <input
-                            type="text"
-                            id="titre"
-                            name="titre"
-                            value="{{ old('titre', $mission->titre) }}"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                        @error('titre')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
+                        <p class="text-sm text-gray-500">
+                            Modifiez les informations principales de la mission.
+                        </p>
 
                     </div>
 
 
-                    {{-- Spécialité recherchée --}}
-                    <div class="mb-4">
+                    {{-- Titre --}}
+                    <div class="mb-6">
 
-                        <label for="specialite_recherchee"
-                               class="block font-medium mb-1">
-                            Spécialité recherchée
+                        <label for="titre"
+                               class="block text-sm font-semibold text-gray-700">
+                            Titre
                         </label>
 
-                        <select
-                            id="specialite_recherchee"
-                            name="specialite_recherchee"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
+                        <input id="titre"
+                               type="text"
+                               name="titre"
+                               value="{{ old('titre', $mission->titre) }}"
+                               class="mt-2 block w-full rounded-xl border-gray-200
+                                      focus:border-blue-500 focus:ring-blue-500"
+                               required>
 
-                            <option value="">
-                                -- Choisir une spécialité --
-                            </option>
-
-                            @foreach ($specialites as $specialite)
-
-                                <option
-                                    value="{{ $specialite->nom }}"
-                                    {{ old('specialite_recherchee', $mission->specialite_recherchee) == $specialite->nom ? 'selected' : '' }}
-                                >
-                                    {{ $specialite->nom }}
-                                </option>
-
-                            @endforeach
-
-                        </select>
-
-                        @error('specialite_recherchee')
-                            <p class="text-red-600 text-sm mt-1">
+                        @error('titre')
+                            <p class="text-red-600 text-sm mt-2">
                                 {{ $message }}
                             </p>
                         @enderror
@@ -102,23 +138,22 @@
 
 
                     {{-- Description --}}
-                    <div class="mb-4">
+                    <div class="mb-6">
 
                         <label for="description"
-                               class="block font-medium mb-1">
+                               class="block text-sm font-semibold text-gray-700">
                             Description
                         </label>
 
-                        <textarea
-                            id="description"
-                            name="description"
-                            rows="5"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >{{ old('description', $mission->description) }}</textarea>
+                        <textarea id="description"
+                                  name="description"
+                                  rows="5"
+                                  class="mt-2 block w-full rounded-xl border-gray-200
+                                         focus:border-blue-500 focus:ring-blue-500"
+                                  required>{{ old('description', $mission->description) }}</textarea>
 
                         @error('description')
-                            <p class="text-red-600 text-sm mt-1">
+                            <p class="text-red-600 text-sm mt-2">
                                 {{ $message }}
                             </p>
                         @enderror
@@ -126,194 +161,266 @@
                     </div>
 
 
-                    {{-- Budget --}}
-                    <div class="mb-4">
+                    {{-- Spécialité --}}
+                    <div class="mb-6">
 
-                        <label for="budget"
-                               class="block font-medium mb-1">
-                            Budget (DH)
+                        <label for="specialite_recherchee"
+                               class="block text-sm font-semibold text-gray-700">
+                            Spécialité recherchée
                         </label>
 
-                        <input
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            id="budget"
-                            name="budget"
-                            value="{{ old('budget', $mission->budget) }}"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
+                        <select id="specialite_recherchee"
+                                name="specialite_recherchee"
+                                class="mt-2 block w-full rounded-xl border-gray-200
+                                       focus:border-blue-500 focus:ring-blue-500"
+                                required>
 
-                        @error('budget')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Ville --}}
-                    <div class="mb-4">
-
-                        <label for="ville"
-                               class="block font-medium mb-1">
-                            Ville
-                        </label>
-
-                        <input
-                            type="text"
-                            id="ville"
-                            name="ville"
-                            value="{{ old('ville', $mission->ville) }}"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                        @error('ville')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Date début --}}
-                    <div class="mb-4">
-
-                        <label for="date_debut"
-                               class="block font-medium mb-1">
-                            Date de début
-                        </label>
-
-                        <input
-                            type="date"
-                            id="date_debut"
-                            name="date_debut"
-                            value="{{ old('date_debut', $mission->date_debut->format('Y-m-d')) }}"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                        @error('date_debut')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Date fin --}}
-                    <div class="mb-4">
-
-                        <label for="date_fin"
-                               class="block font-medium mb-1">
-                            Date de fin
-                        </label>
-
-                        <input
-                            type="date"
-                            id="date_fin"
-                            name="date_fin"
-                            value="{{ old('date_fin', $mission->date_fin->format('Y-m-d')) }}"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                        @error('date_fin')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Nombre de postes --}}
-                    <div class="mb-4">
-
-                        <label for="nombre_de_postes"
-                               class="block font-medium mb-1">
-                            Nombre de postes
-                        </label>
-
-                        <input
-                            type="number"
-                            id="nombre_de_postes"
-                            name="nombre_de_postes"
-                            value="{{ old('nombre_de_postes', $mission->nombre_de_postes) }}"
-                            min="1"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                        @error('nombre_de_postes')
-                            <p class="text-red-600 text-sm mt-1">
-                                {{ $message }}
-                            </p>
-                        @enderror
-
-                    </div>
-
-
-                    {{-- Niveau d'expérience --}}
-                    <div class="mb-4">
-
-                        <label for="niveau_d_experience"
-                               class="block font-medium mb-1">
-                            Niveau d'expérience
-                        </label>
-
-                        <select
-                            id="niveau_d_experience"
-                            name="niveau_d_experience"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
-
-                            <option value="Débutant"
-                                {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Débutant' ? 'selected' : '' }}>
-                                Débutant
+                            <option value="">
+                                -- Choisir une spécialité --
                             </option>
 
-                            <option value="Intermédiaire"
-                                {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Intermédiaire' ? 'selected' : '' }}>
-                                Intermédiaire
-                            </option>
+                            @foreach ($specialites as $specialite)
 
-                            <option value="Expérimenté"
-                                {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Expérimenté' ? 'selected' : '' }}>
-                                Expérimenté
-                            </option>
+                                <option value="{{ $specialite->nom }}"
+                                    {{ old('specialite_recherchee', $mission->specialite_recherchee) == $specialite->nom ? 'selected' : '' }}>
+
+                                    {{ $specialite->nom }}
+
+                                </option>
+
+                            @endforeach
 
                         </select>
 
-                        @error('niveau_d_experience')
-                            <p class="text-red-600 text-sm mt-1">
+                        @error('specialite_recherchee')
+                            <p class="text-red-600 text-sm mt-2">
                                 {{ $message }}
                             </p>
                         @enderror
+
+                    </div>
+
+
+                    {{-- Budget + Ville --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+                        <div>
+
+                            <label for="budget"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Budget (DH)
+                            </label>
+
+                            <input id="budget"
+                                   type="number"
+                                   name="budget"
+                                   value="{{ old('budget', $mission->budget) }}"
+                                   min="0"
+                                   step="0.01"
+                                   class="mt-2 block w-full rounded-xl border-gray-200
+                                          focus:border-blue-500 focus:ring-blue-500"
+                                   required>
+
+                            @error('budget')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="ville"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Ville
+                            </label>
+
+                            <input id="ville"
+                                   type="text"
+                                   name="ville"
+                                   value="{{ old('ville', $mission->ville) }}"
+                                   class="mt-2 block w-full rounded-xl border-gray-200
+                                          focus:border-blue-500 focus:ring-blue-500"
+                                   required>
+
+                            @error('ville')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Dates --}}
+                    <div class="border-t border-gray-100
+                                pt-8 mt-8 mb-8">
+
+                        <h2 class="text-xl font-bold text-blue-950 mb-1">
+                            Période de la mission
+                        </h2>
+
+                        <p class="text-sm text-gray-500">
+                            Modifiez les dates de la mission.
+                        </p>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+                        <div>
+
+                            <label for="date_debut"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Date de début
+                            </label>
+
+                            <input id="date_debut"
+                                   type="date"
+                                   name="date_debut"
+                                   value="{{ old('date_debut', $mission->date_debut->format('Y-m-d')) }}"
+                                   class="mt-2 block w-full rounded-xl border-gray-200
+                                          focus:border-blue-500 focus:ring-blue-500"
+                                   required>
+
+                            @error('date_debut')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="date_fin"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Date de fin
+                            </label>
+
+                            <input id="date_fin"
+                                   type="date"
+                                   name="date_fin"
+                                   value="{{ old('date_fin', $mission->date_fin->format('Y-m-d')) }}"
+                                   class="mt-2 block w-full rounded-xl border-gray-200
+                                          focus:border-blue-500 focus:ring-blue-500"
+                                   required>
+
+                            @error('date_fin')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+                    </div>
+
+
+                    {{-- Profil recherché --}}
+                    <div class="border-t border-gray-100
+                                pt-8 mt-8 mb-8">
+
+                        <h2 class="text-xl font-bold text-blue-950 mb-1">
+                            Profil recherché
+                        </h2>
+
+                        <p class="text-sm text-gray-500">
+                            Modifiez le profil du médecin recherché.
+                        </p>
+
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+                        {{-- Postes --}}
+                        <div>
+
+                            <label for="nombre_de_postes"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Nombre de postes
+                            </label>
+
+                            <input id="nombre_de_postes"
+                                   type="number"
+                                   name="nombre_de_postes"
+                                   value="{{ old('nombre_de_postes', $mission->nombre_de_postes) }}"
+                                   min="1"
+                                   class="mt-2 block w-full rounded-xl border-gray-200
+                                          focus:border-blue-500 focus:ring-blue-500"
+                                   required>
+
+                            @error('nombre_de_postes')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
+
+
+                        {{-- Expérience --}}
+                        <div>
+
+                            <label for="niveau_d_experience"
+                                   class="block text-sm font-semibold text-gray-700">
+                                Niveau d'expérience
+                            </label>
+
+                            <select id="niveau_d_experience"
+                                    name="niveau_d_experience"
+                                    class="mt-2 block w-full rounded-xl border-gray-200
+                                           focus:border-blue-500 focus:ring-blue-500"
+                                    required>
+
+                                <option value="Débutant"
+                                    {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Débutant' ? 'selected' : '' }}>
+                                    Débutant
+                                </option>
+
+                                <option value="Intermédiaire"
+                                    {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Intermédiaire' ? 'selected' : '' }}>
+                                    Intermédiaire
+                                </option>
+
+                                <option value="Expérimenté"
+                                    {{ old('niveau_d_experience', $mission->niveau_d_experience) == 'Expérimenté' ? 'selected' : '' }}>
+                                    Expérimenté
+                                </option>
+
+                            </select>
+
+                            @error('niveau_d_experience')
+                                <p class="text-red-600 text-sm mt-2">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+
+                        </div>
 
                     </div>
 
 
                     {{-- Statut --}}
-                    <div class="mb-6">
+                    <div class="mb-8">
 
                         <label for="statut"
-                               class="block font-medium mb-1">
-                            Statut
+                               class="block text-sm font-semibold text-gray-700">
+                            Statut de la mission
                         </label>
 
-                        <select
-                            id="statut"
-                            name="statut"
-                            class="w-full border-gray-300 rounded-md"
-                            required
-                        >
+                        <select id="statut"
+                                name="statut"
+                                class="mt-2 block w-full rounded-xl border-gray-200
+                                       focus:border-blue-500 focus:ring-blue-500"
+                                required>
 
                             <option value="ouverte"
                                 {{ old('statut', $mission->statut) == 'ouverte' ? 'selected' : '' }}>
@@ -333,7 +440,7 @@
                         </select>
 
                         @error('statut')
-                            <p class="text-red-600 text-sm mt-1">
+                            <p class="text-red-600 text-sm mt-2">
                                 {{ $message }}
                             </p>
                         @enderror
@@ -342,21 +449,38 @@
 
 
                     {{-- Buttons --}}
-                    <div class="flex gap-3">
+                    <div class="border-t border-gray-100
+                                pt-6
+                                flex flex-col sm:flex-row
+                                gap-3 sm:justify-end">
 
-                        <button
-                            type="submit"
-                            class="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700"
-                        >
-                            Enregistrer les modifications
-                        </button>
+                        <a href="{{ route('missions.index') }}"
+                           class="px-6 py-3
+                                  text-center
+                                  bg-gray-100
+                                  text-gray-700
+                                  rounded-xl
+                                  font-semibold
+                                  hover:bg-gray-200
+                                  transition">
 
-                        <a
-                            href="{{ route('missions.index') }}"
-                            class="bg-gray-500 text-white px-5 py-2 rounded-md hover:bg-gray-600"
-                        >
                             Annuler
+
                         </a>
+
+                        <button type="submit"
+                                class="px-6 py-3
+                                       bg-blue-600
+                                       text-white
+                                       rounded-xl
+                                       font-semibold
+                                       hover:bg-blue-700
+                                       transition
+                                       shadow-md">
+
+                            Enregistrer les modifications
+
+                        </button>
 
                     </div>
 

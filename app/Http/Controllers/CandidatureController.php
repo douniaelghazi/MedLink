@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CandidatureAcceptee;
-use App\Events\CandidatureRefusee;
 use App\Models\Candidature;
 use App\Models\Mission;
+use App\Events\NouvelleCandidature;
+use App\Events\CandidatureAcceptee;
+use App\Events\CandidatureRefusee;
 use Illuminate\Http\Request;
+
 
 class CandidatureController extends Controller
 {
@@ -75,11 +77,12 @@ class CandidatureController extends Controller
         $validated['id_medecin'] = auth()->user()->id;
         $validated['statut'] = 'en_attente';
 
-        Candidature::create($validated);
+        $candidature = Candidature::create($validated);
 
-        return redirect()
-            ->route('candidatures.index')
-            ->with('success', 'Votre candidature a été envoyée avec succès.');
+event(new NouvelleCandidature($candidature));
+
+return redirect()->route('candidatures.index')
+    ->with('success', 'Votre candidature a été envoyée avec succès.');
     }
 
     // Afficher une candidature

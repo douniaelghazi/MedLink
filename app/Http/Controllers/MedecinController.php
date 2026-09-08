@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medecin;
 use App\Models\Specialite;
+use App\Models\Candidature;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,9 +12,30 @@ class MedecinController extends Controller
 {
     // Dashboard
     public function dashboard(): View
-    {
-        return view('medecin.dashboard');
-    }
+{
+    $idMedecin = auth()->user()->id;
+
+    $totalCandidatures = Candidature::where('id_medecin', $idMedecin)->count();
+
+    $candidaturesEnAttente = Candidature::where('id_medecin', $idMedecin)
+        ->where('statut', 'en_attente')
+        ->count();
+
+    $candidaturesAcceptees = Candidature::where('id_medecin', $idMedecin)
+        ->where('statut', 'acceptee')
+        ->count();
+    
+    $candidaturesRefusees = Candidature::where('id_medecin', $idMedecin)
+    ->where('statut', 'refusee')
+    ->count();
+
+    return view('medecin.dashboard', compact(
+        'totalCandidatures',
+        'candidaturesEnAttente',
+        'candidaturesAcceptees',
+        'candidaturesRefusees'
+    ));
+}
 
     // Liste des médecins
     public function index(): View

@@ -140,6 +140,6 @@ public function medecinShow(Mission $mission)
         abort(404);
     }
 
-    return view('medecin.missions.show', compact('mission'));
-  }
+    return view('medecin.mission-show', compact('mission'));
+}
 }

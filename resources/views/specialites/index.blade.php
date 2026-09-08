@@ -1,105 +1,155 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Gestion des spécialités
-        </h2>
-    </x-slot>
+    <div class="min-h-screen bg-sky-50">
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        {{-- Header --}}
+        <div class="bg-white border-b border-sky-100">
+            <div class="max-w-7xl mx-auto px-6 py-5">
+
+                <p class="text-sm font-semibold text-blue-600 uppercase tracking-wide">
+                    Espace Admin
+                </p>
+
+                <h1 class="text-2xl font-bold text-slate-900 mt-1">
+                    Gestion des spécialités
+                </h1>
+
+            </div>
+        </div>
+
+
+        {{-- Main --}}
+        <main class="max-w-7xl mx-auto px-6 py-8">
 
             {{-- Message succès --}}
             @if (session('success'))
-                <div class="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                <div class="mb-6 rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-green-700">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- Header --}}
-            <div class="flex justify-between items-center mb-6">
 
-                <h3 class="text-lg font-semibold">
-                    Liste des spécialités
-                </h3>
+            {{-- Top section --}}
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
 
-                <a href="{{ route('specialites.create') }}"
-                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Liste des spécialités
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        Gérez les spécialités médicales disponibles sur MedLink.
+                    </p>
+                </div>
+
+                <a
+                    href="{{ route('specialites.create') }}"
+                    class="inline-flex items-center justify-center px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition shadow-sm"
+                >
                     + Ajouter une spécialité
                 </a>
 
             </div>
 
-            {{-- Tableau --}}
-            <div class="bg-white shadow-sm rounded-lg overflow-hidden">
 
-                <div class="p-6 overflow-x-auto">
+            {{-- Table --}}
+            <div class="bg-white rounded-2xl border border-sky-100 shadow-sm overflow-hidden">
 
-                    <table class="w-full border-collapse">
+                <div class="overflow-x-auto">
+
+                    <table class="w-full">
 
                         <thead>
-                            <tr class="bg-gray-100">
+                            <tr class="bg-sky-50 border-b border-sky-100">
 
-                                <th class="border p-3 text-left">
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-600">
                                     ID
                                 </th>
 
-                                <th class="border p-3 text-left">
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-600">
                                     Nom
                                 </th>
 
-                                <th class="border p-3 text-left">
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-600">
                                     Description
                                 </th>
 
-                                <th class="border p-3 text-center">
+                                <th class="px-6 py-4 text-center text-sm font-semibold text-slate-600">
                                     Actions
                                 </th>
 
                             </tr>
                         </thead>
 
-                        <tbody>
+
+                        <tbody class="divide-y divide-slate-100">
 
                             @forelse ($specialites as $specialite)
 
-                                <tr class="hover:bg-gray-50">
+                                <tr class="hover:bg-sky-50/50 transition">
 
-                                    <td class="border p-3">
-                                        {{ $specialite->id_specialite }}
+                                    {{-- ID --}}
+                                    <td class="px-6 py-4 text-sm text-slate-500">
+                                        #{{ $specialite->id_specialite }}
                                     </td>
 
-                                    <td class="border p-3 font-medium">
-                                        {{ $specialite->nom }}
+
+                                    {{-- Nom --}}
+                                    <td class="px-6 py-4">
+
+                                        <div class="flex items-center gap-3">
+
+                                            <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-lg">
+                                                🩺
+                                            </div>
+
+                                            <span class="font-semibold text-slate-900">
+                                                {{ $specialite->nom }}
+                                            </span>
+
+                                        </div>
+
                                     </td>
 
-                                    <td class="border p-3">
+
+                                    {{-- Description --}}
+                                    <td class="px-6 py-4 text-sm text-slate-600 max-w-md">
                                         {{ $specialite->description ?? '-' }}
                                     </td>
 
-                                    <td class="border p-3">
 
-                                        <div class="flex justify-center gap-2">
+                                    {{-- Actions --}}
+                                    <td class="px-6 py-4">
 
-                                            <a href="{{ route('specialites.show', $specialite) }}"
-                                               class="bg-gray-500 text-white px-3 py-1 rounded">
+                                        <div class="flex justify-center items-center gap-2">
+
+                                            <a
+                                                href="{{ route('specialites.show', $specialite) }}"
+                                                class="px-3 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-200 transition"
+                                            >
                                                 Voir
                                             </a>
 
-                                            <a href="{{ route('specialites.edit', $specialite) }}"
-                                               class="bg-yellow-500 text-white px-3 py-1 rounded">
+                                            <a
+                                                href="{{ route('specialites.edit', $specialite) }}"
+                                                class="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-semibold hover:bg-blue-200 transition"
+                                            >
                                                 Modifier
                                             </a>
 
-                                            <form action="{{ route('specialites.destroy', $specialite) }}"
-                                                  method="POST"
-                                                  onsubmit="return confirm('Supprimer cette spécialité ?')">
+                                            <form
+                                                action="{{ route('specialites.destroy', $specialite) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Supprimer cette spécialité ?')"
+                                            >
 
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button type="submit"
-                                                        class="bg-red-600 text-white px-3 py-1 rounded">
+                                                <button
+                                                    type="submit"
+                                                    class="px-3 py-2 bg-red-100 text-red-700 rounded-lg text-sm font-semibold hover:bg-red-200 transition"
+                                                >
                                                     Supprimer
                                                 </button>
 
@@ -114,10 +164,34 @@
                             @empty
 
                                 <tr>
-                                    <td colspan="4"
-                                        class="p-6 text-center text-gray-500">
-                                        Aucune spécialité trouvée.
+
+                                    <td colspan="4" class="px-6 py-12 text-center">
+
+                                        <div class="flex flex-col items-center">
+
+                                            <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl mb-4">
+                                                🩺
+                                            </div>
+
+                                            <h3 class="font-semibold text-slate-900">
+                                                Aucune spécialité
+                                            </h3>
+
+                                            <p class="text-sm text-slate-500 mt-1">
+                                                Aucune spécialité médicale n'a encore été ajoutée.
+                                            </p>
+
+                                            <a
+                                                href="{{ route('specialites.create') }}"
+                                                class="mt-4 text-sm font-semibold text-blue-600 hover:text-blue-700"
+                                            >
+                                                + Ajouter une spécialité
+                                            </a>
+
+                                        </div>
+
                                     </td>
+
                                 </tr>
 
                             @endforelse
@@ -126,16 +200,22 @@
 
                     </table>
 
-                    {{-- Pagination --}}
-                    <div class="mt-6">
+                </div>
+
+
+                {{-- Pagination --}}
+                @if($specialites->hasPages())
+
+                    <div class="px-6 py-4 border-t border-slate-100">
                         {{ $specialites->links() }}
                     </div>
 
-                </div>
+                @endif
 
             </div>
 
-        </div>
+        </main>
+
     </div>
 
 </x-app-layout>
