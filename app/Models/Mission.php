@@ -4,22 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Mission extends Model
 {
+    protected $table = 'missions';
+
     protected $primaryKey = 'id_mission';
 
     protected $fillable = [
-        'id_client',
-        'id_specialite',
+        'id_hopital',
         'titre',
         'description',
+        'specialite_recherchee',
         'budget',
         'ville',
         'date_debut',
         'date_fin',
-        'nombre_poste',
-        'niveau_experience',
+        'nombre_de_postes',
+        'niveau_d_experience',
         'statut',
     ];
 
@@ -29,21 +32,21 @@ class Mission extends Model
         'budget' => 'decimal:2',
     ];
 
-    public function client(): BelongsTo
+    public function hopital(): BelongsTo
     {
         return $this->belongsTo(
-            Client::class,
-            'id_client',
-            'id_client'
+            Hopital::class,
+            'id_hopital',
+            'id_hopital'
         );
     }
 
-    public function specialite(): BelongsTo
+    public function candidatures(): HasMany
     {
-        return $this->belongsTo(
-            Specialite::class,
-            'id_specialite',
-            'id_specialite'
+        return $this->hasMany(
+            Candidature::class,
+            'id_mission',
+            'id_mission'
         );
     }
 }

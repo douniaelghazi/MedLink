@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Specialite extends Model
 {
+    protected $table = 'specialites';
+
     protected $primaryKey = 'id_specialite';
 
     protected $fillable = [
@@ -14,17 +16,12 @@ class Specialite extends Model
         'description',
     ];
 
-    public function freelances(): HasMany
+    public function medecins(): HasMany
     {
-        return $this->hasMany(Freelance::class, 'id_specialite');
+        return $this->hasMany(
+            Medecin::class,
+            'id_specialite',
+            'id_specialite'
+        );
     }
-
-    public function missions(): HasMany
-{
-    return $this->hasMany(
-        Mission::class,
-        'id_specialite',
-        'id_specialite'
-    );
-}
 }

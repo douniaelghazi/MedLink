@@ -48,8 +48,8 @@
         required
     >
         <option value="">-- Choisir --</option>
-        <option value="client">Établissement de santé</option>
-        <option value="freelance">Professionnel de santé</option>
+        <option value="hopital">Hôpital</option>
+        <option value="medecin">Médecin</option>
     </select>
 
     <x-input-error :messages="$errors->get('role')" class="mt-2" />

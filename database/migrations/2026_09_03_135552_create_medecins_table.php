@@ -8,20 +8,25 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('freelances', function (Blueprint $table) {
+        Schema::create('medecins', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('id_freelance')->primary();
+            $table->unsignedBigInteger('id_medecin')->primary();
 
-            $table->foreign('id_freelance')
+            $table->foreign('id_medecin')
                 ->references('id')
                 ->on('users')
                 ->cascadeOnDelete();
 
+            $table->string('Photo_de_profil')->nullable();
+            $table->string('nom_complet');
+            $table->string('email');
             $table->string('telephone');
-            $table->string('adresse');
             $table->string('ville');
-            $table->text('description')->nullable();
-            $table->string('cv')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('diplome')->nullable();
+            $table->string('CV')->nullable();
+            $table->boolean('disponibilite')->default(true);
+            $table->text('description_professionnelle')->nullable();
 
             $table->unsignedBigInteger('id_specialite');
 
@@ -36,6 +41,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('freelances');
+        Schema::dropIfExists('medecins');
     }
 };

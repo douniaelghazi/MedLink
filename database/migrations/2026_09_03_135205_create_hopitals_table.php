@@ -8,23 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('hopitals', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('id_client')->primary();
+            $table->unsignedBigInteger('id_hopital')->primary();
 
-            $table->foreign('id_client')
+            $table->foreign('id_hopital')
                 ->references('id')
                 ->on('users')
                 ->cascadeOnDelete();
 
-            $table->string('telephone');
-            $table->string('nom_etablissement');
-            $table->string('type_etablissement');
+            $table->string('nom');
+            $table->string('type');
             $table->string('adresse');
-            $table->string('ville');
-            $table->string('email');
-            $table->string('logo')->nullable();
             $table->text('description')->nullable();
+            $table->string('logo')->nullable();
 
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('hopitals');
     }
 };

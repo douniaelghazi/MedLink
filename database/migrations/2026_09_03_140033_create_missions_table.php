@@ -12,13 +12,13 @@ return new class extends Migration
 
             $table->id('id_mission');
 
-            $table->unsignedBigInteger('id_client');
-
-            $table->unsignedBigInteger('id_specialite');
+            $table->unsignedBigInteger('id_hopital');
 
             $table->string('titre');
 
             $table->text('description');
+
+            $table->string('specialite_recherchee');
 
             $table->decimal('budget', 10, 2);
 
@@ -28,9 +28,9 @@ return new class extends Migration
 
             $table->date('date_fin');
 
-            $table->integer('nombre_poste');
+            $table->integer('nombre_de_postes');
 
-            $table->string('niveau_experience');
+            $table->string('niveau_d_experience');
 
             $table->enum('statut', [
                 'ouverte',
@@ -40,14 +40,9 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('id_client')
-                ->references('id_client')
-                ->on('clients')
-                ->cascadeOnDelete();
-
-            $table->foreign('id_specialite')
-                ->references('id_specialite')
-                ->on('specialites')
+            $table->foreign('id_hopital')
+                ->references('id_hopital')
+                ->on('hopitals')
                 ->cascadeOnDelete();
         });
     }

@@ -5,8 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminUserController extends Controller
+class AdminController extends Controller
 {
+    public function dashboard()
+    {
+        $totalUsers = User::count();
+        $totalHopitals = User::where('role', 'hopital')->count();
+        $totalMedecins = User::where('role', 'medecin')->count();
+        $totalAdmins = User::where('role', 'admin')->count();
+
+        $users = User::latest()->paginate(10);
+
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'totalHopitals',
+            'totalMedecins',
+            'totalAdmins',
+            'users'
+        ));
+    }
+
     public function index()
     {
         $users = User::latest()->paginate(10);
@@ -27,7 +45,7 @@ class AdminUserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'role' => ['required', 'in:admin,client,freelance'],
+            'role' => ['required', 'in:admin,hopital,medecin'],
         ]);
 
         $user->update([
@@ -55,4 +73,3 @@ class AdminUserController extends Controller
             ->with('success', 'Utilisateur supprimé avec succès.');
     }
 }
-

@@ -9,9 +9,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Client;
-use App\Models\Freelance;
-
 
 #[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
@@ -20,11 +17,6 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -34,18 +26,26 @@ class User extends Authenticatable
     }
 
     /**
-     * Relation avec Client
+     * Relation avec Hôpital
      */
-    public function client(): HasOne
+    public function hopital(): HasOne
     {
-        return $this->hasOne(Client::class, 'id_client', 'id');
+        return $this->hasOne(
+            Hopital::class,
+            'id_hopital',
+            'id'
+        );
     }
-/**
-     * Relation avec Freelance
-     */
 
-    public function freelance(): HasOne
-{
-    return $this->hasOne(Freelance::class, 'id_freelance', 'id');
-}
+    /**
+     * Relation avec Médecin
+     */
+    public function medecin(): HasOne
+    {
+        return $this->hasOne(
+            Medecin::class,
+            'id_medecin',
+            'id'
+        );
+    }
 }
