@@ -560,29 +560,40 @@
     
 
     {{-- ================= FOOTER ================= --}}
-    <footer class="bg-blue-950 text-white py-8">
+    <footer class="bg-[#1e2d5b] text-white">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-8">
 
-        <div class="max-w-7xl mx-auto px-6">
-
-            <div class="flex flex-col
-                        md:flex-row
-                        justify-between
-                        items-center
-                        gap-4">
-
-                <img src="{{ asset('images/logo.png') }}"
-                     alt="MedLink"
-                     class="w-48 h-auto">
-
-                <p class="text-blue-200 text-sm">
-                    © {{ date('Y') }} MedLink. Tous droits réservés.
-                </p>
-
-            </div>
-
+        <!-- Logo -->
+        <div>
+            <img src="{{ asset('images/logo.png') }}"
+                 alt="MedLink"
+                 class="h-20 w-auto">
         </div>
 
-    </footer>
+        <!-- Contact -->
+        <div class="text-center md:text-left">
+            <h3 class="text-lg font-semibold mb-3">Contact</h3>
+
+            <p class="text-blue-100">
+                📧 contact@medlink.ma
+            </p>
+
+            <p class="text-blue-100">
+                📞 +212 506 80 23 01
+            </p>
+
+            <p class="text-blue-100">
+                📍 Maroc
+            </p>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-blue-100 text-sm text-center">
+            © {{ date('Y') }} MedLink. Tous droits réservés.
+        </div>
+
+    </div>
+</footer>
 
 </body>
 
