@@ -1,64 +1,49 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div>
-            <p class="text-sm text-blue-600 font-semibold">
-                ESPACE HÔPITAL
-            </p>
-
-            <h2 class="text-2xl font-bold text-blue-950 mt-1">
-                Dashboard
-            </h2>
-        </div>
-    </x-slot>
-
-
     <div class="min-h-screen bg-sky-50">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {{-- Header --}}
+        <div class="bg-white border-b border-sky-100">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+
+                <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide">
+                    Espace Hôpital
+                </p>
+
+                <h1 class="text-xl font-bold text-slate-900 mt-1">
+                    Mon espace
+                </h1>
+
+            </div>
+        </div>
 
 
-            {{-- ================= WELCOME ================= --}}
-            <div class="bg-gradient-to-r from-blue-600 to-sky-500
-                        rounded-3xl
-                        shadow-lg
-                        p-8
-                        mb-8
-                        text-white">
+        {{-- Main --}}
+        <main class="max-w-7xl mx-auto px-6 py-6">
 
-                <div class="flex flex-col md:flex-row
-                            md:items-center
-                            md:justify-between
-                            gap-6">
+            {{-- Welcome --}}
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-6">
+
+                <div class="flex items-center justify-between gap-5">
 
                     <div>
 
-                        <p class="text-blue-100 text-sm font-medium mb-2">
+                        <p class="text-sm text-blue-600 font-medium mb-1">
                             Bienvenue dans votre espace
                         </p>
 
-                        <h1 class="text-3xl md:text-4xl font-bold">
+                        <h2 class="text-2xl font-bold text-slate-900">
                             Bonjour, {{ auth()->user()->name }} 👋
-                        </h1>
+                        </h2>
 
-                        <p class="mt-3 text-blue-50 max-w-xl">
-                            Gérez vos missions médicales et consultez
-                            les candidatures reçues depuis votre espace.
+                        <p class="text-sm text-slate-600 mt-2 max-w-xl">
+                            Gérez vos missions médicales et consultez les candidatures reçues.
                         </p>
 
                     </div>
 
-
-                    <div class="hidden md:flex
-                                w-24 h-24
-                                bg-white/15
-                                rounded-3xl
-                                items-center
-                                justify-center
-                                text-5xl">
-
+                    <div class="hidden sm:flex w-14 h-14 rounded-xl bg-white border border-blue-100 items-center justify-center text-2xl">
                         🏥
-
                     </div>
 
                 </div>
@@ -66,44 +51,30 @@
             </div>
 
 
-            {{-- ================= STATISTICS ================= --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-
+            {{-- Statistiques --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
 
                 {{-- Total missions --}}
-                <div class="bg-white
-                            rounded-2xl
-                            shadow-sm
-                            border border-sky-100
-                            p-6">
+                <div class="bg-white rounded-xl border border-sky-100 shadow-sm p-5">
 
                     <div class="flex items-center justify-between">
 
                         <div>
-
-                            <p class="text-gray-500 text-sm font-medium">
+                            <p class="text-sm text-slate-500">
                                 Total missions
                             </p>
 
-                            <p class="text-4xl font-bold text-blue-950 mt-2">
+                            <p class="text-3xl font-bold text-slate-900 mt-1">
                                 {{ $totalMissions }}
                             </p>
 
-                            <p class="text-sm text-gray-400 mt-2">
+                            <p class="text-xs text-slate-400 mt-1">
                                 Missions créées
                             </p>
-
                         </div>
 
-                        <div class="w-14 h-14
-                                    bg-blue-100
-                                    text-blue-600
-                                    rounded-2xl
-                                    flex items-center justify-center
-                                    text-2xl">
-
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-lg">
                             📋
-
                         </div>
 
                     </div>
@@ -112,39 +83,26 @@
 
 
                 {{-- Missions ouvertes --}}
-                <div class="bg-white
-                            rounded-2xl
-                            shadow-sm
-                            border border-sky-100
-                            p-6">
+                <div class="bg-white rounded-xl border border-sky-100 shadow-sm p-5">
 
                     <div class="flex items-center justify-between">
 
                         <div>
-
-                            <p class="text-gray-500 text-sm font-medium">
+                            <p class="text-sm text-slate-500">
                                 Missions ouvertes
                             </p>
 
-                            <p class="text-4xl font-bold text-blue-950 mt-2">
+                            <p class="text-3xl font-bold text-slate-900 mt-1">
                                 {{ $missionsOuvertes }}
                             </p>
 
-                            <p class="text-sm text-gray-400 mt-2">
+                            <p class="text-xs text-slate-400 mt-1">
                                 Actuellement disponibles
                             </p>
-
                         </div>
 
-                        <div class="w-14 h-14
-                                    bg-sky-100
-                                    text-sky-600
-                                    rounded-2xl
-                                    flex items-center justify-center
-                                    text-2xl">
-
+                        <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-lg">
                             🔓
-
                         </div>
 
                     </div>
@@ -153,39 +111,26 @@
 
 
                 {{-- Candidatures --}}
-                <div class="bg-white
-                            rounded-2xl
-                            shadow-sm
-                            border border-sky-100
-                            p-6">
+                <div class="bg-white rounded-xl border border-sky-100 shadow-sm p-5">
 
                     <div class="flex items-center justify-between">
 
                         <div>
-
-                            <p class="text-gray-500 text-sm font-medium">
+                            <p class="text-sm text-slate-500">
                                 Candidatures reçues
                             </p>
 
-                            <p class="text-4xl font-bold text-blue-950 mt-2">
+                            <p class="text-3xl font-bold text-slate-900 mt-1">
                                 {{ $totalCandidatures }}
                             </p>
 
-                            <p class="text-sm text-gray-400 mt-2">
+                            <p class="text-xs text-slate-400 mt-1">
                                 Toutes vos missions
                             </p>
-
                         </div>
 
-                        <div class="w-14 h-14
-                                    bg-blue-100
-                                    text-blue-600
-                                    rounded-2xl
-                                    flex items-center justify-center
-                                    text-2xl">
-
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-lg">
                             👨‍⚕️
-
                         </div>
 
                     </div>
@@ -195,20 +140,16 @@
             </div>
 
 
-            {{-- ================= ACTIONS ================= --}}
-            <div class="bg-white
-                        rounded-2xl
-                        shadow-sm
-                        border border-sky-100
-                        p-6 mb-8">
+            {{-- Actions rapides --}}
+            <div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-6">
 
-                <div class="mb-6">
+                <div class="mb-5">
 
-                    <p class="text-blue-600 text-sm font-semibold uppercase">
+                    <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide">
                         Actions rapides
                     </p>
 
-                    <h2 class="text-2xl font-bold text-blue-950 mt-1">
+                    <h2 class="text-xl font-bold text-slate-900 mt-1">
                         Gérez votre activité
                     </h2>
 
@@ -217,71 +158,42 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-
                     {{-- Mes missions --}}
-                    <a href="{{ route('missions.index') }}"
-                       class="group
-                              p-5
-                              rounded-2xl
-                              bg-sky-50
-                              border border-sky-100
-                              hover:bg-blue-600
-                              hover:text-white
-                              transition">
+                    <a
+                        href="{{ route('missions.index') }}"
+                        class="group rounded-xl border border-sky-100 bg-sky-50 p-4 hover:bg-blue-600 transition"
+                    >
 
-                        <div class="w-12 h-12
-                                    bg-white
-                                    text-blue-600
-                                    rounded-xl
-                                    flex items-center justify-center
-                                    text-xl
-                                    mb-4
-                                    shadow-sm">
-
+                        <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-lg mb-3">
                             📋
-
                         </div>
 
-                        <h3 class="font-bold text-lg">
+                        <h3 class="font-semibold text-slate-900 group-hover:text-white">
                             Mes missions
                         </h3>
 
-                        <p class="text-sm text-gray-500 group-hover:text-blue-100 mt-1">
+                        <p class="text-xs text-slate-500 group-hover:text-blue-100 mt-1">
                             Consulter et gérer vos missions
                         </p>
 
                     </a>
 
 
-                    {{-- Créer --}}
-                    <a href="{{ route('missions.create') }}"
-                       class="group
-                              p-5
-                              rounded-2xl
-                              bg-blue-50
-                              border border-blue-100
-                              hover:bg-blue-600
-                              hover:text-white
-                              transition">
+                    {{-- Créer une mission --}}
+                    <a
+                        href="{{ route('missions.create') }}"
+                        class="group rounded-xl border border-sky-100 bg-sky-50 p-4 hover:bg-blue-600 transition"
+                    >
 
-                        <div class="w-12 h-12
-                                    bg-white
-                                    text-blue-600
-                                    rounded-xl
-                                    flex items-center justify-center
-                                    text-xl
-                                    mb-4
-                                    shadow-sm">
-
+                        <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-lg mb-3">
                             +
-
                         </div>
 
-                        <h3 class="font-bold text-lg">
+                        <h3 class="font-semibold text-slate-900 group-hover:text-white">
                             Créer une mission
                         </h3>
 
-                        <p class="text-sm text-gray-500 group-hover:text-blue-100 mt-1">
+                        <p class="text-xs text-slate-500 group-hover:text-blue-100 mt-1">
                             Publier une nouvelle opportunité
                         </p>
 
@@ -289,34 +201,20 @@
 
 
                     {{-- Candidatures --}}
-                    <a href="{{ route('hopital.candidatures.index') }}"
-                       class="group
-                              p-5
-                              rounded-2xl
-                              bg-sky-50
-                              border border-sky-100
-                              hover:bg-blue-600
-                              hover:text-white
-                              transition">
+                    <a
+                        href="{{ route('hopital.candidatures.index') }}"
+                        class="group rounded-xl border border-sky-100 bg-sky-50 p-4 hover:bg-blue-600 transition"
+                    >
 
-                        <div class="w-12 h-12
-                                    bg-white
-                                    text-blue-600
-                                    rounded-xl
-                                    flex items-center justify-center
-                                    text-xl
-                                    mb-4
-                                    shadow-sm">
-
+                        <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-lg mb-3">
                             👨‍⚕️
-
                         </div>
 
-                        <h3 class="font-bold text-lg">
+                        <h3 class="font-semibold text-slate-900 group-hover:text-white">
                             Candidatures
                         </h3>
 
-                        <p class="text-sm text-gray-500 group-hover:text-blue-100 mt-1">
+                        <p class="text-xs text-slate-500 group-hover:text-blue-100 mt-1">
                             Consulter les candidatures reçues
                         </p>
 
@@ -324,35 +222,21 @@
 
 
                     {{-- Profil --}}
-                    <a href="{{ route('hopital.profile.edit') }}"
-                       class="group
-                              p-5
-                              rounded-2xl
-                              bg-blue-50
-                              border border-blue-100
-                              hover:bg-blue-600
-                              hover:text-white
-                              transition">
+                    <a
+                        href="{{ route('hopital.profile.edit') }}"
+                        class="group rounded-xl border border-sky-100 bg-sky-50 p-4 hover:bg-blue-600 transition"
+                    >
 
-                        <div class="w-12 h-12
-                                    bg-white
-                                    text-blue-600
-                                    rounded-xl
-                                    flex items-center justify-center
-                                    text-xl
-                                    mb-4
-                                    shadow-sm">
-
+                        <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-lg mb-3">
                             👤
-
                         </div>
 
-                        <h3 class="font-bold text-lg">
+                        <h3 class="font-semibold text-slate-900 group-hover:text-white">
                             Mon profil
                         </h3>
 
-                        <p class="text-sm text-gray-500 group-hover:text-blue-100 mt-1">
-                            Modifier les informations de l'hôpital
+                        <p class="text-xs text-slate-500 group-hover:text-blue-100 mt-1">
+                            Modifier les informations
                         </p>
 
                     </a>
@@ -361,91 +245,7 @@
 
             </div>
 
-
-            {{-- ================= BOTTOM ================= --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-
-                {{-- Notifications --}}
-                <div class="bg-white
-                            rounded-2xl
-                            shadow-sm
-                            border border-sky-100
-                            p-6">
-
-                    <div class="flex items-center gap-4">
-
-                        <div class="w-12 h-12
-                                    bg-yellow-100
-                                    text-yellow-600
-                                    rounded-xl
-                                    flex items-center justify-center
-                                    text-xl">
-
-                            🔔
-
-                        </div>
-
-                        <div>
-
-                            <h3 class="font-bold text-blue-950">
-                                Notifications
-                            </h3>
-
-                            <p class="text-sm text-gray-500">
-                                Consultez vos dernières notifications.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <a href="{{ route('notifications.index') }}"
-                       class="inline-block mt-5
-                              text-blue-600
-                              font-semibold
-                              hover:text-blue-800">
-
-                        Voir mes notifications →
-
-                    </a>
-
-                </div>
-
-
-                {{-- Information --}}
-                <div class="bg-blue-600
-                            rounded-2xl
-                            p-6
-                            text-white">
-
-                    <h3 class="text-xl font-bold">
-                        Trouvez les bons médecins
-                    </h3>
-
-                    <p class="text-blue-100 mt-2 leading-relaxed">
-                        Publiez vos missions médicales et gérez les
-                        candidatures des médecins depuis une seule plateforme.
-                    </p>
-
-                    <a href="{{ route('missions.create') }}"
-                       class="inline-block mt-5
-                              px-5 py-2.5
-                              bg-white
-                              text-blue-700
-                              rounded-xl
-                              font-semibold
-                              hover:bg-sky-50">
-
-                        Publier une mission →
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
+        </main>
 
     </div>
 

@@ -1,100 +1,136 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div>
-            <p class="text-sm font-medium text-blue-600">
-                ESPACE MÉDECIN
+    {{-- Header --}}
+    <div class="bg-white border-b border-sky-100">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+
+            <p class="text-xs font-semibold text-blue-600 uppercase tracking-wide">
+                Espace Médecin
             </p>
 
-            <h2 class="font-bold text-2xl text-blue-950">
+            <h1 class="text-xl font-bold text-slate-900 mt-1">
                 Détail de la mission
-            </h2>
+            </h1>
+
         </div>
-    </x-slot>
+    </div>
 
-    <div class="min-h-screen bg-sky-50 py-10">
 
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-sky-50">
 
-            {{-- En-tête --}}
-            <div class="bg-gradient-to-r from-blue-600 to-sky-400 rounded-3xl p-8 text-white shadow-lg mb-8">
+        <main class="max-w-5xl mx-auto px-6 py-6">
 
-                <span class="inline-flex px-3 py-1 bg-white/20 rounded-full text-sm font-semibold">
-                    Mission ouverte
-                </span>
+            {{-- Mission principale --}}
+            <div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-6 mb-5">
 
-                <h1 class="text-3xl md:text-4xl font-bold mt-4">
-                    {{ $mission->titre }}
-                </h1>
+                <div class="flex items-start justify-between gap-5">
 
-                <p class="mt-3 text-blue-50">
-                    Une opportunité médicale disponible sur MedLink.
-                </p>
+                    <div>
+
+                        <span class="inline-flex px-2.5 py-1 bg-green-50 text-green-700 border border-green-100 rounded-full text-xs font-semibold">
+                            Mission ouverte
+                        </span>
+
+                        <h2 class="text-2xl font-bold text-slate-900 mt-3">
+                            {{ $mission->titre }}
+                        </h2>
+
+                        <p class="text-sm text-slate-500 mt-2">
+                            Une opportunité médicale disponible sur MedLink.
+                        </p>
+
+                    </div>
+
+                    <div class="hidden sm:flex w-11 h-11 rounded-xl bg-blue-50 items-center justify-center text-lg">
+                        🩺
+                    </div>
+
+                </div>
 
             </div>
 
 
             {{-- Contenu --}}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-                {{-- Informations principales --}}
-                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-blue-100 p-6">
+                {{-- Présentation --}}
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-sky-100 shadow-sm p-6">
 
-                    <h2 class="text-xl font-bold text-blue-950 mb-5">
+                    <h2 class="text-lg font-bold text-slate-900 mb-5">
                         Présentation de la mission
                     </h2>
 
-                    <div class="mb-7">
-                        <p class="text-sm font-semibold text-gray-500 mb-2">
+
+                    {{-- Description --}}
+                    <div class="mb-6">
+
+                        <p class="text-sm font-semibold text-slate-700 mb-2">
                             Description
                         </p>
 
-                        <p class="text-gray-700 leading-relaxed">
+                        <p class="text-sm text-slate-600 leading-relaxed">
                             {{ $mission->description }}
                         </p>
+
                     </div>
 
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {{-- Informations --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
-                        <div class="bg-sky-50 rounded-xl p-4">
-                            <p class="text-xs text-gray-500">
+                        {{-- Spécialité --}}
+                        <div class="bg-sky-50 border border-sky-100 rounded-xl p-4">
+
+                            <p class="text-xs text-slate-500">
                                 Spécialité recherchée
                             </p>
 
-                            <p class="font-semibold text-blue-950 mt-1">
+                            <p class="text-sm font-semibold text-slate-900 mt-1">
                                 🩺 {{ $mission->specialite_recherchee }}
                             </p>
+
                         </div>
 
-                        <div class="bg-sky-50 rounded-xl p-4">
-                            <p class="text-xs text-gray-500">
+
+                        {{-- Ville --}}
+                        <div class="bg-sky-50 border border-sky-100 rounded-xl p-4">
+
+                            <p class="text-xs text-slate-500">
                                 Ville
                             </p>
 
-                            <p class="font-semibold text-blue-950 mt-1">
+                            <p class="text-sm font-semibold text-slate-900 mt-1">
                                 📍 {{ $mission->ville }}
                             </p>
+
                         </div>
 
-                        <div class="bg-sky-50 rounded-xl p-4">
-                            <p class="text-xs text-gray-500">
+
+                        {{-- Date début --}}
+                        <div class="bg-sky-50 border border-sky-100 rounded-xl p-4">
+
+                            <p class="text-xs text-slate-500">
                                 Date de début
                             </p>
 
-                            <p class="font-semibold text-blue-950 mt-1">
+                            <p class="text-sm font-semibold text-slate-900 mt-1">
                                 📅 {{ $mission->date_debut->format('d/m/Y') }}
                             </p>
+
                         </div>
 
-                        <div class="bg-sky-50 rounded-xl p-4">
-                            <p class="text-xs text-gray-500">
+
+                        {{-- Date fin --}}
+                        <div class="bg-sky-50 border border-sky-100 rounded-xl p-4">
+
+                            <p class="text-xs text-slate-500">
                                 Date de fin
                             </p>
 
-                            <p class="font-semibold text-blue-950 mt-1">
+                            <p class="text-sm font-semibold text-slate-900 mt-1">
                                 📅 {{ $mission->date_fin->format('d/m/Y') }}
                             </p>
+
                         </div>
 
                     </div>
@@ -103,65 +139,79 @@
 
 
                 {{-- Résumé --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-blue-100 p-6">
+                <div class="bg-white rounded-2xl border border-sky-100 shadow-sm p-6">
 
-                    <h2 class="text-xl font-bold text-blue-950 mb-5">
+                    <h2 class="text-lg font-bold text-slate-900 mb-5">
                         Informations
                     </h2>
 
-                    <div class="space-y-4">
 
-                        <div>
-                            <p class="text-xs text-gray-500">
-                                Budget
-                            </p>
+                    {{-- Budget --}}
+                    <div>
 
-                            <p class="text-lg font-bold text-blue-600 mt-1">
-                                {{ $mission->budget }} DH
-                            </p>
-                        </div>
+                        <p class="text-xs text-slate-500">
+                            Budget
+                        </p>
 
-                        <div class="border-t pt-4">
-                            <p class="text-xs text-gray-500">
-                                Nombre de postes
-                            </p>
-
-                            <p class="font-semibold text-blue-950 mt-1">
-                                👥 {{ $mission->nombre_de_postes }}
-                            </p>
-                        </div>
-
-                        <div class="border-t pt-4">
-                            <p class="text-xs text-gray-500">
-                                Niveau d'expérience
-                            </p>
-
-                            <p class="font-semibold text-blue-950 mt-1">
-                                🎓 {{ $mission->niveau_d_experience }}
-                            </p>
-                        </div>
+                        <p class="text-lg font-bold text-blue-600 mt-1">
+                            {{ $mission->budget }} DH
+                        </p>
 
                     </div>
 
 
-                    {{-- Postuler --}}
-                    <a
-                        href="{{ route('candidatures.create', ['id_mission' => $mission->id_mission]) }}"
-                        class="block w-full text-center mt-7 px-5 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition shadow-md">
-                        Postuler à cette mission
-                    </a>
+                    {{-- Postes --}}
+                    <div class="border-t border-slate-100 pt-4 mt-4">
 
-                    <a
-                        href="{{ route('medecin.missions.index') }}"
-                        class="block w-full text-center mt-3 px-5 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition">
-                        Retour aux missions
-                    </a>
+                        <p class="text-xs text-slate-500">
+                            Nombre de postes
+                        </p>
+
+                        <p class="text-sm font-semibold text-slate-900 mt-1">
+                            👥 {{ $mission->nombre_de_postes }}
+                        </p>
+
+                    </div>
+
+
+                    {{-- Expérience --}}
+                    <div class="border-t border-slate-100 pt-4 mt-4">
+
+                        <p class="text-xs text-slate-500">
+                            Niveau d'expérience
+                        </p>
+
+                        <p class="text-sm font-semibold text-slate-900 mt-1">
+                            🎓 {{ $mission->niveau_d_experience }}
+                        </p>
+
+                    </div>
+
+
+                    {{-- Actions --}}
+                    <div class="border-t border-slate-100 pt-5 mt-5">
+
+                        <a
+                            href="{{ route('candidatures.create', ['id_mission' => $mission->id_mission]) }}"
+                            class="block w-full text-center px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
+                        >
+                            Postuler à cette mission
+                        </a>
+
+                        <a
+                            href="{{ route('medecin.missions.index') }}"
+                            class="block w-full text-center mt-3 px-5 py-2.5 bg-slate-100 text-slate-700 rounded-xl font-semibold hover:bg-slate-200 transition"
+                        >
+                            Retour aux missions
+                        </a>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </main>
 
     </div>
 
