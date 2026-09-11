@@ -185,10 +185,18 @@
             </p>
 
             <p>
-                <strong>CV :</strong>
-                {{ $candidature->medecin->CV ?? 'Non renseigné' }}
-            </p>
+    <strong>CV :</strong>
 
+    @if($candidature->medecin->CV)
+        <a href="{{ asset('storage/' . $candidature->medecin->CV) }}"
+           target="_blank"
+           class="text-blue-600 hover:text-blue-800 font-medium underline">
+            Voir le CV
+        </a>
+    @else
+        <span>Non renseigné</span>
+    @endif
+</p>
             <p>
                 <strong>Disponibilité :</strong>
                 {{ $candidature->medecin->disponibilite ? 'Disponible' : 'Non disponible' }}
