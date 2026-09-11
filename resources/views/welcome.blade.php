@@ -19,7 +19,7 @@
 
         <div class="max-w-7xl mx-auto px-6">
 
-            <div class="h-24 flex items-center justify-between">
+            <div class="h-20 flex items-center justify-between">
 
                 {{-- Logo --}}
                 <a href="{{ url('/') }}" class="flex items-center">
@@ -100,7 +100,7 @@
     <section id="accueil"
              class="bg-gradient-to-br from-sky-50 via-white to-blue-50 overflow-hidden">
 
-        <div class="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-6 py-8 lg:py-10">
 
             <div class="grid lg:grid-cols-2 gap-10 items-center">
 
@@ -266,7 +266,7 @@
 
 
                 {{-- RIGHT : IMAGE --}}
-                <div class="relative">
+                <div class="relative -mt-6 lg:-mt-10">
 
                     <div class="absolute
                                 -top-10
@@ -557,43 +557,53 @@
     </section>
 
 
-    
-
     {{-- ================= FOOTER ================= --}}
-    <footer class="bg-[#1e2d5b] text-white">
-    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer id="contact" class="bg-[#1e2d5b] text-white">
 
-        <!-- Logo -->
-        <div>
-            <img src="{{ asset('images/logo.png') }}"
-                 alt="MedLink"
-                 class="h-20 w-auto">
+        <div class="max-w-7xl mx-auto px-6 py-10
+                    flex flex-col md:flex-row
+                    items-center justify-between
+                    gap-8">
+
+            {{-- Logo --}}
+            <div>
+                <img src="{{ asset('images/logo.png') }}"
+                     alt="MedLink"
+                     class="h-20 w-auto">
+            </div>
+
+            {{-- Contact --}}
+            <div class="text-center md:text-left">
+
+                <h3 class="text-lg font-semibold mb-3">
+                    Contact
+                </h3>
+
+                <p class="text-blue-100">
+                    📧 contact@medlink.ma
+                </p>
+
+                <p class="text-blue-100">
+                    📞 +212 506 80 23 01
+                </p>
+
+                <p class="text-blue-100">
+                    📍 Maroc
+                </p>
+
+            </div>
+
+            {{-- Copyright --}}
+            <div class="text-blue-100 text-sm text-center">
+
+                © {{ date('Y') }} MedLink. Tous droits réservés.
+
+            </div>
+
         </div>
 
-        <!-- Contact -->
-        <div class="text-center md:text-left">
-            <h3 class="text-lg font-semibold mb-3">Contact</h3>
+    </footer>
 
-            <p class="text-blue-100">
-                📧 contact@medlink.ma
-            </p>
-
-            <p class="text-blue-100">
-                📞 +212 506 80 23 01
-            </p>
-
-            <p class="text-blue-100">
-                📍 Maroc
-            </p>
-        </div>
-
-        <!-- Copyright -->
-        <div class="text-blue-100 text-sm text-center">
-            © {{ date('Y') }} MedLink. Tous droits réservés.
-        </div>
-
-    </div>
-</footer>
 
 </body>
 
