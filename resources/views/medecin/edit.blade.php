@@ -102,7 +102,8 @@
 
 
                     <form method="POST"
-                          action="{{ route('medecin.profile.update') }}">
+                      action="{{ route('medecin.profile.update') }}"
+                      enctype="multipart/form-data">
 
                         @csrf
                         @method('PUT')
@@ -310,13 +311,12 @@
                                         CV
                                     </label>
 
-                                    <input
-                                        type="text"
-                                        name="CV"
-                                        id="CV"
-                                        value="{{ old('CV', $medecin?->CV) }}"
-                                        placeholder="Nom ou chemin du CV"
-                                        class="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500">
+                                   <input
+                                   type="file"
+                                   name="CV"
+                                   id="CV"
+                                   accept=".pdf,application/pdf"
+                                   class="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500">
 
                                     @error('CV')
                                         <p class="mt-2 text-sm text-red-600">

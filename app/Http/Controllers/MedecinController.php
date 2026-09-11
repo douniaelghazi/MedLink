@@ -52,27 +52,33 @@ class MedecinController extends Controller
 
     // Mettre à jour le profil
     public function update(Request $request)
-    {
-        $medecin = Medecin::where('id_medecin', auth()->id())
-            ->firstOrFail();
+{
+    $validated = $request->validate([
+        'nom_complet' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255'],
+        'telephone' => ['required', 'string', 'max:255'],
+        'ville' => ['required', 'string', 'max:255'],
+        'experience' => ['nullable', 'string', 'max:255'],
+        'diplome' => ['nullable', 'string', 'max:255'],
+        'CV' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
+        'disponibilite' => ['required', 'boolean'],
+        'description_professionnelle' => ['nullable', 'string'],
+        'id_specialite' => ['required', 'exists:specialites,id_specialite'],
+    ]);
 
-        $validated = $request->validate([
-            'nom_complet' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'telephone' => ['required', 'string', 'max:255'],
-            'ville' => ['required', 'string', 'max:255'],
-            'experience' => ['nullable', 'string', 'max:255'],
-            'diplome' => ['nullable', 'string', 'max:255'],
-            'CV' => ['nullable', 'string', 'max:255'],
-            'disponibilite' => ['required', 'boolean'],
-            'description_professionnelle' => ['nullable', 'string'],
-            'id_specialite' => ['required', 'exists:specialites,id_specialite'],
-        ]);
+   $validated['id_medecin'] = auth()->id();
 
-        $medecin->update($validated);
+if ($request->hasFile('CV')) {
+    $validated['CV'] = $request->file('CV')->store('cv', 'public');
+}
 
-        return redirect()
-            ->route('medecin.profile.edit')
-            ->with('success', 'Profil médecin modifié avec succès.');
-    }
+Medecin::updateOrCreate(
+    ['id_medecin' => auth()->id()],
+    $validated
+);
+
+    return redirect()
+        ->route('medecin.profile.edit')
+        ->with('success', 'Profil médecin enregistré avec succès.');
+}
 }

@@ -15,7 +15,7 @@ class CandidatureController extends Controller
     // Liste des candidatures reçues par l'hôpital
     public function hopitalIndex()
     {
-        $candidatures = Candidature::with('mission', 'medecin')
+        $candidatures = Candidature::with('mission', 'medecin.specialite')
             ->whereHas('mission', function ($query) {
                 $query->where('id_hopital', auth()->user()->id);
             })
@@ -138,7 +138,7 @@ return redirect()->route('candidatures.index')
     }
 
     // Accepter ou refuser une candidature
-    public function updateStatut(Request $request, Candidature $candidature)
+   public function updateStatut(Request $request, Candidature $candidature)
 {
     $request->validate([
         'statut' => ['required', 'in:acceptee,refusee'],
@@ -149,23 +149,32 @@ return redirect()->route('candidatures.index')
     $this->authorize('updateStatut', $candidature);
 
     $candidature->update([
-        'statut' => $request->statut,
+        'statut' => $request->statut
     ]);
 
-    // Déclencher l'événement lorsque la candidature est acceptée
     if ($request->statut === 'acceptee') {
-    event(new CandidatureAcceptee($candidature));
-}
+
+        $nombreAcceptees = Candidature::where('id_mission', $candidature->id_mission)
+            ->where('statut', 'acceptee')
+            ->count();
+
+        if ($nombreAcceptees >= $candidature->mission->nombre_de_postes) {
+            $candidature->mission->update([
+                'statut' => 'fermee'
+            ]);
+        }
+
+        event(new CandidatureAcceptee($candidature));
+    }
 
     if ($request->statut === 'refusee') {
-    event(new CandidatureRefusee($candidature));
-}
+        event(new CandidatureRefusee($candidature));
+    }
 
     return redirect()
         ->route('hopital.candidatures.index')
         ->with('success', 'Statut de la candidature modifié avec succès.');
 }
-
     // Supprimer une candidature
     public function destroy(Candidature $candidature)
     {

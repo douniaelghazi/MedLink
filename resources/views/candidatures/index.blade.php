@@ -138,23 +138,73 @@
 
                             </div>
 
+{{-- Profil du médecin --}}
+@if(auth()->user()->role === 'hopital')
 
-                            {{-- Candidat --}}
-                            @if(auth()->user()->role === 'hopital')
+    <div class="mb-5">
 
-                                <div class="mb-5">
+        <p class="text-sm font-semibold text-slate-700 mb-3">
+            Profil du médecin
+        </p>
 
-                                    <p class="text-sm font-semibold text-slate-700 mb-1">
-                                        Candidat
-                                    </p>
+        <div class="space-y-2 text-sm text-slate-600">
 
-                                    <p class="text-sm text-slate-600">
-                                        {{ $candidature->nom }}
-                                    </p>
+            <p>
+                <strong>Nom :</strong>
+                {{ $candidature->medecin->nom_complet }}
+            </p>
 
-                                </div>
+            <p>
+                <strong>Email :</strong>
+                {{ $candidature->medecin->email }}
+            </p>
 
-                            @endif
+            <p>
+                <strong>Téléphone :</strong>
+                {{ $candidature->medecin->telephone }}
+            </p>
+
+            <p>
+                <strong>Ville :</strong>
+                {{ $candidature->medecin->ville }}
+            </p>
+
+            <p>
+                <strong>Spécialité :</strong>
+                {{ $candidature->medecin->specialite->nom ?? 'Non renseignée' }}
+            </p>
+
+            <p>
+                <strong>Expérience :</strong>
+                {{ $candidature->medecin->experience ?? 'Non renseignée' }}
+            </p>
+
+            <p>
+                <strong>Diplôme :</strong>
+                {{ $candidature->medecin->diplome ?? 'Non renseigné' }}
+            </p>
+
+            <p>
+                <strong>CV :</strong>
+                {{ $candidature->medecin->CV ?? 'Non renseigné' }}
+            </p>
+
+            <p>
+                <strong>Disponibilité :</strong>
+                {{ $candidature->medecin->disponibilite ? 'Disponible' : 'Non disponible' }}
+            </p>
+
+            <p>
+                <strong>Description :</strong>
+                {{ $candidature->medecin->description_professionnelle ?? 'Non renseignée' }}
+            </p>
+
+        </div>
+
+    </div>
+
+@endif
+                         
 
 
                             {{-- Message --}}
