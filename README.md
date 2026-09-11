@@ -1,58 +1,347 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🩺 MedLink
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+MedLink est une application web Laravel qui met en relation les hôpitaux et les médecins pour la publication, la recherche et la gestion de missions médicales.
 
-## About Laravel
+🎯 Objectif
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Les hôpitaux publient des missions médicales.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Les médecins recherchent les missions disponibles.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Les médecins peuvent déposer des candidatures.
 
-## Learning Laravel
+Les hôpitaux consultent, acceptent ou refusent les candidatures.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Les utilisateurs reçoivent des notifications liées aux candidatures.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+👥 Rôles
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+👑 Administrateur
 
-## Agentic Development
+Dashboard
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Gestion des utilisateurs
 
-```bash
-composer require laravel/boost --dev
+Modification des rôles
 
-php artisan boost:install
-```
+Suppression des utilisateurs
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+CRUD des spécialités
 
-## Contributing
+🏥 Hôpital
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Dashboard
 
-## Code of Conduct
+Gestion du profil
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+CRUD des missions
 
-## Security Vulnerabilities
+Consultation des candidatures reçues
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Consultation du profil du médecin candidat
 
-## License
+Acceptation / refus des candidatures
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+👨‍⚕️ Médecin
+
+Dashboard
+
+Gestion du profil professionnel
+
+Gestion de la spécialité
+
+CV au format PDF
+
+Consultation des missions ouvertes
+
+Recherche et filtres
+
+Candidature à une mission
+
+Gestion de ses candidatures
+
+📋 Mission
+
+Une mission contient :
+
+titre
+
+description
+
+spécialité recherchée
+
+budget
+
+ville
+
+date de début
+
+date de fin
+
+nombre de postes
+
+niveau d'expérience
+
+statut
+
+Statuts :
+
+ouverte
+fermee
+annulee
+
+Fermeture automatique
+
+Une mission peut recevoir plusieurs candidatures.
+
+Elle passe automatiquement à fermee lorsque le nombre de candidatures acceptées atteint le nombre de postes.
+
+Exemple :
+
+3 postes
+→ 1 acceptée : ouverte
+→ 2 acceptées : ouverte
+→ 3 acceptées : fermée
+
+📝 Candidature
+
+Une candidature contient :
+
+nom
+CV
+message
+date_candidature
+statut
+id_medecin
+id_mission
+
+Statuts :
+
+en_attente
+acceptee
+refusee
+annulee
+
+Un médecin ne peut pas postuler deux fois à la même mission.
+
+🔔 Notifications
+
+Le système utilise :
+
+Events
+
+Listeners
+
+Notifications Laravel
+
+Queue
+
+Événements :
+
+NouvelleCandidature
+CandidatureAcceptee
+CandidatureRefusee
+
+Ils permettent notamment de notifier l'hôpital lors d'une nouvelle candidature et le médecin lorsqu'une candidature est acceptée ou refusée.
+
+📄 CV
+
+Le médecin peut sélectionner un fichier PDF depuis son ordinateur.
+
+Les CV sont stockés dans :
+
+storage/app/public/cv/
+
+Le chemin du fichier est enregistré en base de données.
+
+Pour créer le lien public :
+
+php artisan storage:link
+
+🗄️ Base de données
+
+Tables principales :
+
+users
+specialites
+hopitals
+medecins
+missions
+candidatures
+notifications
+sessions
+
+Relations principales :
+
+User      → Hopital
+User      → Medecin
+Hopital   → Missions
+Medecin   → Specialite
+Medecin   → Candidatures
+Mission   → Candidatures
+
+🛡️ Sécurité
+
+Le projet utilise :
+
+Middleware de rôle
+
+Policies Laravel
+
+Validation des formulaires
+
+Protection CSRF
+
+Authentification Laravel Breeze
+
+Policies :
+
+MissionPolicy
+CandidaturePolicy
+SpecialitePolicy
+
+🏗️ Structure
+
+app/
+├── Events/
+├── Http/
+│   ├── Controllers/
+│   └── Middleware/
+├── Listeners/
+├── Models/
+├── Notifications/
+└── Policies/
+
+database/
+├── factories/
+├── migrations/
+└── seeders/
+
+resources/
+├── css/
+├── js/
+└── views/
+
+routes/
+├── web.php
+└── auth.php
+
+storage/
+└── app/public/cv/
+
+tests/
+├── Feature/
+└── Unit/
+
+🛠️ Technologies
+
+Laravel 13.29.0
+
+PHP 8.3.32
+
+MySQL
+
+Blade
+
+Tailwind CSS
+
+Vite
+
+Laravel Breeze
+
+Eloquent ORM
+
+PHPUnit
+
+Git / GitHub
+
+Docker / Docker Compose
+
+🚀 Installation
+
+git clone <URL_DU_REPOSITORY>
+cd MedLink
+composer install
+npm install
+copy .env.example .env
+php artisan key:generate
+
+Configurer MySQL dans .env, puis :
+
+php artisan migrate
+php artisan storage:link
+npm run dev
+php artisan serve --port=8001
+
+Application :
+
+http://127.0.0.1:8001
+
+Pour les notifications en queue :
+
+php artisan queue:work
+
+🧪 Tests
+
+Les tests couvrent notamment :
+
+authentification
+
+profils
+
+missions
+
+candidatures
+
+spécialités
+
+notifications
+
+dashboards
+
+Dernier résultat :
+
+47 passed
+91 assertions
+
+Lancer les tests :
+
+php artisan test
+
+🐳 Docker
+
+Une configuration Docker est présente avec :
+
+Laravel / PHP 8.3
+
+MySQL 8.0
+
+Docker Compose
+
+Configuration du port MySQL Docker :
+
+3308 → 3306
+
+📌 Commandes utiles
+
+php artisan --version
+php -v
+php artisan route:list
+php artisan migrate:status
+php artisan optimize:clear
+php artisan storage:link
+php artisan queue:work
+php artisan test
+php artisan serve --port=8001
+
+🚫 Fonctionnalités non implémentées
+
+Cette version ne contient pas :
+
+Messaging
+
+Reviews / Évaluations
+
+📍 État du projet
+
+MedLink dispose actuellement de l'authentification, des rôles, des dashboards, des profils Hôpital/Médecin, du CRUD des missions, du CRUD des candidatures, de la recherche et des filtres, des spécialités, des notifications avec Events/Listeners/Queue, du stockage des CV PDF, des Policies et des tests PHPUnit.
