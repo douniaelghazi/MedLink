@@ -21,26 +21,30 @@
 
         {{-- ================= LEFT ================= --}}
         <div class="bg-gradient-to-br from-blue-600 to-sky-400
-                    text-white px-7 py-6
+                    text-white px-7 py-5
                     flex flex-col justify-center">
 
+            {{-- Logo --}}
             <img
                 src="{{ asset('images/logo.png') }}"
                 alt="MedLink"
-                class="w-32 h-auto mb-4"
+                class="w-44 h-auto mb-4"
             >
 
+            {{-- Title --}}
             <h1 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                 Bienvenue sur<br>
                 MedLink
             </h1>
 
-            <p class="text-xs lg:text-sm leading-5 text-blue-50 mb-5">
+            {{-- Description --}}
+            <p class="text-xs lg:text-sm leading-5 text-blue-50 mb-4">
                 Connectez-vous à votre espace et retrouvez vos
                 missions, candidatures et opportunités médicales.
             </p>
 
 
+            {{-- ================= AVANTAGES ================= --}}
             <div class="space-y-2.5">
 
                 {{-- Hôpitaux --}}
@@ -99,17 +103,22 @@
 
 
         {{-- ================= RIGHT ================= --}}
-        <div class="px-7 py-6 flex flex-col justify-center">
+        <div class="px-7 py-5 flex flex-col justify-center">
 
             <div class="w-full max-w-sm mx-auto">
 
-                <h2 class="text-2xl lg:text-3xl font-bold text-slate-800">
-                    Connexion
-                </h2>
+                {{-- Title --}}
+                <div class="mb-4">
 
-                <p class="text-slate-500 text-xs mt-1 mb-4">
-                    Connectez-vous à votre compte MedLink
-                </p>
+                    <h2 class="text-2xl lg:text-3xl font-bold text-slate-800">
+                        Connexion
+                    </h2>
+
+                    <p class="text-slate-500 text-xs mt-1">
+                        Connectez-vous à votre compte MedLink
+                    </p>
+
+                </div>
 
 
                 {{-- ================= FORM ================= --}}
@@ -194,16 +203,16 @@
                     </div>
 
 
-                    {{-- Remember + Forgot --}}
+                    {{-- Remember + Forgot password --}}
                     <div class="flex items-center justify-between">
 
-                        <label class="flex items-center gap-2
-                                      text-xs text-slate-600">
+                        <label class="flex items-center gap-2 text-xs text-slate-600">
 
                             <input
                                 type="checkbox"
                                 name="remember"
-                                class="rounded border-slate-300
+                                class="rounded
+                                       border-slate-300
                                        text-blue-600
                                        focus:ring-blue-500"
                             >
@@ -219,7 +228,8 @@
 
                             <a
                                 href="{{ route('password.request') }}"
-                                class="text-xs text-blue-600
+                                class="text-xs
+                                       text-blue-600
                                        hover:text-blue-700"
                             >
                                 Mot de passe oublié ?
@@ -235,10 +245,10 @@
                         type="submit"
 
                         class="w-full h-10
+                               rounded-lg
                                bg-blue-600
                                hover:bg-blue-700
                                text-white
-                               rounded-lg
                                text-xs
                                font-semibold
                                transition"
@@ -249,7 +259,7 @@
                 </form>
 
 
-                {{-- Register --}}
+                {{-- ================= REGISTER ================= --}}
                 <div class="border-t border-slate-100
                             mt-3 pt-3
                             text-center">

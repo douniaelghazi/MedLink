@@ -21,32 +21,39 @@
 
         {{-- ================= LEFT ================= --}}
         <div class="bg-gradient-to-br from-blue-600 to-sky-400
-                    text-white px-7 py-6
+                    text-white px-7 py-5
                     flex flex-col justify-center">
 
+            {{-- Logo --}}
             <img
                 src="{{ asset('images/logo.png') }}"
                 alt="MedLink"
-                class="w-32 h-auto mb-4"
+                class="w-44 h-auto mb-4"
             >
 
+            {{-- Title --}}
             <h1 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                 Rejoignez<br>
                 MedLink
             </h1>
 
-            <p class="text-xs lg:text-sm leading-5 text-blue-50 mb-5">
+            {{-- Description --}}
+            <p class="text-xs lg:text-sm leading-5 text-blue-50 mb-4">
                 Créez votre compte et accédez à une plateforme
                 dédiée aux professionnels de santé.
             </p>
 
+
+            {{-- ================= AVANTAGES ================= --}}
             <div class="space-y-2.5">
 
                 {{-- Hôpitaux --}}
                 <div class="flex items-center gap-3">
 
-                    <div class="w-9 h-9 shrink-0 rounded-lg bg-white/20
-                                flex items-center justify-center text-base">
+                    <div class="w-9 h-9 shrink-0 rounded-lg
+                                bg-white/20
+                                flex items-center justify-center
+                                text-base">
                         🏥
                     </div>
 
@@ -66,8 +73,10 @@
                 {{-- Médecins --}}
                 <div class="flex items-center gap-3">
 
-                    <div class="w-9 h-9 shrink-0 rounded-lg bg-white/20
-                                flex items-center justify-center text-base">
+                    <div class="w-9 h-9 shrink-0 rounded-lg
+                                bg-white/20
+                                flex items-center justify-center
+                                text-base">
                         👨‍⚕️
                     </div>
 
@@ -87,8 +96,10 @@
                 {{-- Candidatures --}}
                 <div class="flex items-center gap-3">
 
-                    <div class="w-9 h-9 shrink-0 rounded-lg bg-white/20
-                                flex items-center justify-center text-base">
+                    <div class="w-9 h-9 shrink-0 rounded-lg
+                                bg-white/20
+                                flex items-center justify-center
+                                text-base">
                         📋
                     </div>
 
@@ -110,19 +121,25 @@
 
 
         {{-- ================= RIGHT ================= --}}
-        <div class="px-7 py-6 flex flex-col justify-center">
+        <div class="px-7 py-5 flex flex-col justify-center">
 
             <div class="w-full max-w-sm mx-auto">
 
-                <h2 class="text-2xl lg:text-3xl font-bold text-slate-800">
-                    Créer un compte
-                </h2>
+                {{-- Title --}}
+                <div class="mb-4">
 
-                <p class="text-slate-500 text-xs mt-1 mb-4">
-                    Rejoignez la communauté MedLink
-                </p>
+                    <h2 class="text-2xl lg:text-3xl font-bold text-slate-800">
+                        Créer un compte
+                    </h2>
+
+                    <p class="text-slate-500 text-xs mt-1">
+                        Rejoignez la communauté MedLink
+                    </p>
+
+                </div>
 
 
+                {{-- ================= FORM ================= --}}
                 <form
                     method="POST"
                     action="{{ route('register') }}"
@@ -342,7 +359,7 @@
                 </form>
 
 
-                {{-- Login --}}
+                {{-- ================= LOGIN ================= --}}
                 <div class="border-t border-slate-100
                             mt-3 pt-3
                             text-center">
