@@ -144,8 +144,9 @@
                     method="POST"
                     action="{{ route('register') }}"
                     class="space-y-2.5"
-                >
+                > 
 
+                    {{-- Sécuriser le formulaire POST --}}
                     @csrf
 
 
@@ -163,6 +164,7 @@
                             id="name"
                             type="text"
                             name="name"
+                            {{-- Récupérer l'ancienne saisie --}}
                             value="{{ old('name') }}"
                             required
                             autofocus
@@ -176,7 +178,7 @@
                                    focus:border-blue-500
                                    focus:ring-blue-500"
                         >
-
+                        {{-- Récupérer l'ancienne saisie --}}
                         @error('name')
                             <p class="text-[10px] text-red-600 mt-0.5">
                                 {{ $message }}
