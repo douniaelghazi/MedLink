@@ -2,8 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-// Événement déclenché lorsqu'il y a trop de tentatives de connexion
-use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\Lockout;  // Événement déclenché lorsqu'il y a trop de tentatives de connexion
 
 // Utilisé pour le type des règles de validation
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -60,7 +59,6 @@ class LoginRequest extends FormRequest
     {
         // Vérifie si le nombre de tentatives de connexion n'est pas dépassé
         $this->ensureIsNotRateLimited();
-
 
         // Vérifie si l'email et le mot de passe correspondent à un utilisateur
         if (! Auth::attempt(

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+// la requête envoyée par le navigateur
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
